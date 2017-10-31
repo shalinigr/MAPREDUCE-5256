@@ -490,7 +490,7 @@ public abstract class CombineFileInputFormat<K, V>
             }
             blklist.add(oneblock);
             // Add this host to rackToNodes map
-            addHostToRack(oneblock.racks[j], oneblock.hosts[j]);
+            addHostToRack(oneblock.racks[j], oneblock.hosts[j], rackToNodes);
          }
 
           // add this block to the node --> block map
@@ -554,7 +554,7 @@ public abstract class CombineFileInputFormat<K, V>
     }
   }
 
-  private static void addHostToRack(String rack, String host) {
+  private static void addHostToRack(String rack, String host, HashMap<String, Set<String>> rackToNodes) {
     Set<String> hosts = rackToNodes.get(rack);
     if (hosts == null) {
       hosts = new HashSet<String>();
