@@ -566,7 +566,9 @@ public abstract class CombineFileInputFormat<K, V>
   private static List<String> getHosts(List<String> racks) {
     List<String> hosts = new ArrayList<String>();
     for (String rack : racks) {
+    	if(rackToNodes != null) {
       hosts.addAll(rackToNodes.get(rack));
+    	}
     }
     return hosts;
   }
