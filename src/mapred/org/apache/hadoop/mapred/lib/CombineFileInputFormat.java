@@ -254,7 +254,7 @@ public abstract class CombineFileInputFormat<K, V>
     // populate all the blocks for all files
     long totLength = 0;
     for (int i = 0; i < paths.length; i++) {
-      files[i] = new OneFileInfo(paths[i], job, 
+      files[i] = new OneFileInfo(paths[i], job, rackToNodes, 
                                  rackToBlocks, blockToNodes, nodeToBlocks);
       totLength += files[i].getLength();
     }
@@ -450,7 +450,7 @@ public abstract class CombineFileInputFormat<K, V>
     private long fileSize;               // size of the file
     private OneBlockInfo[] blocks;       // all blocks in this file
 
-    OneFileInfo(Path path, JobConf job,
+    OneFileInfo(Path path, JobConf job,HashMap<String, Set<String>> rackToNodes,
                 HashMap<String, List<OneBlockInfo>> rackToBlocks,
                 HashMap<OneBlockInfo, String[]> blockToNodes,
                 HashMap<String, List<OneBlockInfo>> nodeToBlocks)
